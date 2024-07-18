@@ -69,7 +69,8 @@ def mostrar_menu():
     print("4. Reporte de sueldos")
     print("5. Salir del programa")
 
-
+def main():
+    sueldos = []
     while True:
         mostrar_menu()
         opcion = input("Seleccione una opción: ")

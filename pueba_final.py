@@ -1,5 +1,6 @@
 import random
 from statistics import mean, geometric_mean
+import csv
 
 
 trabajadores = ["Juan Perez", "Maria Garcia", "Carlos Lopez", "Ana Martinez", "Pedro Rodriguez",
@@ -47,7 +48,19 @@ def calcular_estadisticas(sueldos):
     sueldo_promedio = mean(sueldos)
     sueldo_media_geom = geometric_mean(sueldos)
     return sueldo_maximo, sueldo_minimo, sueldo_promedio, sueldo_media_geom
-  
+
+def generar_reporte(sueldos):
+    with open('reporte_sueldos.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Nombre empleado', 'Sueldo Base', 'Descuento Salud', 'Descuento AFP', 'Sueldo Liquido'])
+        for i, sueldo in enumerate(sueldos):
+            desc_salud = sueldo * 0.07
+            desc_afp = sueldo * 0.12
+            sueldo_liquido = sueldo - desc_salud - desc_afp
+            writer.writerow([trabajadores[i], sueldo, desc_salud, desc_afp, sueldo_liquido])
+    print("Archivo 'reporte_sueldos.csv' generado correctamente.")
+
+
 def mostrar_menu():
     print("________Menú:________")
     print("1. Asignar sueldos aleatorios")
@@ -78,7 +91,24 @@ def mostrar_menu():
             else:
                 sueldo_max, sueldo_min, sueldo_prom, sueldo_geom = calcular_estadisticas(sueldos)
                 print("Estadísticas de sueldos:")
-                print(f"Sueldo más alto: ${sueldo_max}")
-                print(f"Sueldo más bajo: ${sueldo_min}")
+                print(f"Sueldo mas alto: ${sueldo_max}")
+                print(f"Sueldo mas bajo: ${sueldo_min}")
                 print(f"Promedio de sueldos: ${sueldo_prom:.2f}")
-                print(f"Media geométrica: ${sueldo_geom:.2f}")              
+                print(f"Media geometrica: ${sueldo_geom:.2f}")              
+        elif opcion == '4':
+            if not sueldos:
+                print("Primero debe asignar sueldos aleatorios.")
+            else:
+                generar_reporte(sueldos)
+
+        elif opcion == '5':
+            print("Finalizando programa...")
+            print("Desarrollado por Larry Montecino")
+            print("RUT 20.883.113-5")
+            break
+
+        else:
+            print("Opción no valida. Por favor, seleccione una opción del menu.")
+
+if __name__ == "__main__":
+    main()

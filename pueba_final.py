@@ -105,7 +105,7 @@ def main():
         elif opcion == '5':
             print("Finalizando programa...")
             print("Desarrollado por Larry Montecino")
-            print("RUT 20.883.113-5")
+            print("RUT: 20.883.113-5")
             break
 
         else:

@@ -1,4 +1,5 @@
 import random
+from statistics import mean, geometric_mean
 
 
 trabajadores = ["Juan Perez", "Maria Garcia", "Carlos Lopez", "Ana Martinez", "Pedro Rodriguez",
@@ -40,7 +41,13 @@ def clasificar_sueldos(sueldos):
         print(f"{nombre}\t${sueldo}")
     
     print("TOTAL SUELDOS: $", sum(sueldos))
-    
+def calcular_estadisticas(sueldos):
+    sueldo_maximo = max(sueldos)
+    sueldo_minimo = min(sueldos)
+    sueldo_promedio = mean(sueldos)
+    sueldo_media_geom = geometric_mean(sueldos)
+    return sueldo_maximo, sueldo_minimo, sueldo_promedio, sueldo_media_geom
+  
 def mostrar_menu():
     print("________Menú:________")
     print("1. Asignar sueldos aleatorios")
@@ -63,3 +70,15 @@ def mostrar_menu():
                 print("Primero debe asignar sueldos aleatorios.")
             else:
                 clasificar_sueldos(sueldos)
+
+
+        elif opcion == '3':
+            if not sueldos:
+                print("Primero debe asignar sueldos aleatorios.")
+            else:
+                sueldo_max, sueldo_min, sueldo_prom, sueldo_geom = calcular_estadisticas(sueldos)
+                print("Estadísticas de sueldos:")
+                print(f"Sueldo más alto: ${sueldo_max}")
+                print(f"Sueldo más bajo: ${sueldo_min}")
+                print(f"Promedio de sueldos: ${sueldo_prom:.2f}")
+                print(f"Media geométrica: ${sueldo_geom:.2f}")              
